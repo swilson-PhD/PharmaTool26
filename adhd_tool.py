@@ -1,11 +1,24 @@
 import streamlit as st
 
-st.title("ADHD Tool")
+st.set_page_config(layout="wide")
 
-mood = st.checkbox("Mood Swings")
-suicidal = st.checkbox("Suicidal Thoughts")
-hallucination = st.checkbox("Hallucinations")
+st.title("ADHD Pharmacotherapy Tool")
+st.markdown("Clinical Decision-Support Framework")
 
+st.markdown("---")
+
+# Layout
+col1, col2, col3 = st.columns(3)
+
+# INPUT
+with col1:
+    st.subheader("Patient Profile")
+
+    mood = st.checkbox("Mood Swings")
+    suicidal = st.checkbox("Suicidal Thoughts")
+    hallucination = st.checkbox("Hallucinations")
+
+# SCORING
 score = 0
 
 if mood:
@@ -15,15 +28,48 @@ if suicidal:
 if hallucination:
     score += 2
 
-st.write("Score:", score)
-
+# RISK
 if hallucination:
-    st.write("Avoid stimulants, use non-stimulants")
-elif suicidal:
-    st.write("Use caution, consider non-stimulants")
-elif mood:
-    st.write("Monitor stimulant response")
+    risk = "HIGH"
+    color = "red"
+elif score >= 5:
+    risk = "HIGH"
+    color = "red"
+elif score >= 3:
+    risk = "MODERATE"
+    color = "orange"
 else:
-    st.write("Standard treatment may be used")
+    risk = "LOW"
+    color = "green"
 
-st.warning("This is not a prescribing tool")
+# RISK DISPLAY
+with col2:
+    st.subheader("Risk Assessment")
+
+    st.metric("Score", score)
+    st.markdown(f"<h2 style='color:{color};'>Risk: {risk}</h2>", unsafe_allow_html=True)
+
+# DRUG OUTPUT
+with col3:
+    st.subheader("Pharmacological Considerations")
+
+    if hallucination:
+        st.error("Psychotic features present")
+        st.write("Avoid stimulants")
+        st.write("Use Atomoxetine / Guanfacine")
+
+    elif suicidal:
+        st.warning("High-risk psychiatric profile")
+        st.write("Use stimulants cautiously")
+        st.write("Consider non-stimulants")
+
+    elif mood:
+        st.info("Emotional dysregulation")
+        st.write("Monitor stimulant response")
+
+    else:
+        st.success("Low-risk profile")
+        st.write("Standard stimulant therapy (Methylphenidate)")
+
+st.markdown("---")
+st.warning("This tool is exploratory and not a prescribing system.")
