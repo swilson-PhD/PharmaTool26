@@ -30,7 +30,20 @@ h1 {
 
 
 # ---------------- TITLE ----------------
-st.title("ADHD Pharmacotherapy Decision-Support Tool")
+st.markdown("""
+<div style='
+background: linear-gradient(90deg, #1f4e79, #4fa3d1);
+padding: 20px;
+border-radius: 12px;
+text-align: center;
+color: white;
+font-size: 28px;
+font-weight: bold;
+box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+'>
+ADHD Pharmacotherapy Decision-Support Tool
+</div>
+""", unsafe_allow_html=True)
 
 st.caption("Applicable for young adults (18–24 years) | Exploratory clinical framework")
 
