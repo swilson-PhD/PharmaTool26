@@ -12,7 +12,7 @@ st.markdown("""
 .card {
     padding: 20px;
     border-radius: 14px;
-    background-color: white;
+    background-color: blue;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
 }
 .footer-box {
