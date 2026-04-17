@@ -28,8 +28,6 @@ h1 {
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- LOGO ----------------
-st.image("logo.png", use_container_width=True)
 
 # ---------------- TITLE ----------------
 st.title("ADHD Pharmacotherapy Decision-Support Tool")
