@@ -140,6 +140,32 @@ st.markdown("---")
 st.subheader("Treatment Pathway")
 
 st.markdown("""
+<div style='display:flex; gap:15px;'>
+
+<div style='flex:1; background-color:#d4edda; padding:15px; border-radius:10px;'>
+<b style='color:#155724;'>LOW RISK</b><br>
+• Start stimulant therapy<br>
+• Example: Methylphenidate<br>
+</div>
+
+<div style='flex:1; background-color:#fff3cd; padding:15px; border-radius:10px;'>
+<b style='color:#856404;'>MODERATE RISK</b><br>
+• Cautious stimulant use<br>
+• Consider non-stimulant<br>
+• Monitor closely<br>
+</div>
+
+<div style='flex:1; background-color:#f8d7da; padding:15px; border-radius:10px;'>
+<b style='color:#721c24;'>HIGH RISK</b><br>
+• Avoid stimulants<br>
+• Prefer non-stimulants<br>
+• Psychiatric supervision required<br>
+</div>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
 **Step 1: Initial Therapy**
 - Low Risk → Stimulant (Methylphenidate)  
 - Moderate Risk → Cautious stimulant / Non-stimulant  
