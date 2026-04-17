@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="ADHD Pharmacotherapy Tool", layout="wide")
+st.set_page_config(page_title="ADHD Tool", layout="wide")
 
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
@@ -12,8 +12,9 @@ st.markdown("""
 .card {
     padding: 20px;
     border-radius: 14px;
-    background-color: blue;
+    background-color: white;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #1f4e79;
 }
 .footer-box {
     background-color: #eef3f8;
@@ -21,43 +22,65 @@ st.markdown("""
     border-radius: 12px;
     text-align: center;
 }
-h1 {
-    text-align: center;
-    color: #1f4e79;
-}
 </style>
 """, unsafe_allow_html=True)
-
 
 # ---------------- TITLE ----------------
 st.markdown("""
 <div style='
 background: linear-gradient(90deg, #1f4e79, #4fa3d1);
-padding: 20px;
+padding: 18px;
 border-radius: 12px;
 text-align: center;
 color: white;
 font-size: 28px;
 font-weight: bold;
-box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 '>
 ADHD Pharmacotherapy Decision-Support Tool
 </div>
 """, unsafe_allow_html=True)
 
-st.caption("Applicable for young adults (18–24 years) | Exploratory clinical framework")
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.info("This tool is based on pilot research using the ADHD ASRS v1.1 screening scale. It provides exploratory risk stratification and does NOT constitute a clinical diagnosis.")
+# ---------------- APPLICABILITY ----------------
+st.markdown("""
+<div style='
+background-color:#800000;
+padding:12px;
+border-radius:10px;
+text-align:center;
+color:white;
+font-weight:bold;
+'>
+Applicable for young adults (18–24 years) screening positive for ADHD symptoms
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------- DISCLAIMER ----------------
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.markdown("""
+<div style='
+background-color:#f4a261;
+padding:12px;
+border-radius:10px;
+text-align:center;
+color:black;
+'>
+This tool is based on pilot research using the ADHD ASRS v1.1 screening scale. 
+It provides exploratory risk stratification and does NOT constitute a clinical diagnosis.
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("---")
 
 # ---------------- LAYOUT ----------------
-col1, col2, col3 = st.columns([1,1,1])
+col1, col2, col3 = st.columns(3)
 
-# ---------------- INPUT PANEL ----------------
+# ---------------- INPUT ----------------
 with col1:
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.subheader("Patient Profile")
+    st.subheader("🧾 Patient Profile")
 
     mood = st.checkbox("Frequent Mood Swings")
     suicidal = st.checkbox("Suicidal Ideation")
@@ -74,7 +97,7 @@ if suicidal:
 if hallucination:
     score += 2
 
-# ---------------- RISK LOGIC ----------------
+# ---------------- RISK ----------------
 if hallucination:
     risk = "HIGH"
     color = "#d9534f"
@@ -91,7 +114,7 @@ else:
 # ---------------- RISK PANEL ----------------
 with col2:
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.subheader("Risk Assessment")
+    st.subheader("📊 Risk Assessment")
 
     st.metric("Score", score)
     st.progress(score / 7)
@@ -103,7 +126,7 @@ with col2:
 # ---------------- DRUG PANEL ----------------
 with col3:
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.subheader("Pharmacological Considerations")
+    st.subheader("💊 Pharmacological Considerations")
 
     if hallucination:
         st.error("⚠️ Psychotic features present")
@@ -125,64 +148,75 @@ with col3:
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-# ---------------- CLINICAL INTERPRETATION ----------------
-st.markdown("---")
-with st.expander("Clinical Interpretation"):
-    if mood:
-        st.write("Mood instability may affect stimulant tolerability.")
-    if suicidal:
-        st.write("Suicidal ideation requires careful safety monitoring.")
-    if hallucination:
-        st.write("Psychotic symptoms may worsen with stimulant therapy.")
-
 # ---------------- TREATMENT PATHWAY ----------------
 st.markdown("---")
-st.subheader("Treatment Pathway")
+st.subheader("🧭 Treatment Pathway")
 
 st.markdown("""
-<div style='display:flex; gap:15px;'>
+<div style='display:flex; gap:20px;'>
 
-<div style='flex:1; background-color:#d4edda; padding:15px; border-radius:10px;'>
-<b style='color:#155724;'>LOW RISK</b><br>
+<div style='flex:1; background:linear-gradient(135deg,#d4edda,#a8e6cf);
+padding:18px; border-radius:12px;'>
+
+<h4 style='color:#155724;'>✅ LOW RISK</h4>
+<p style='color:#155724;'>
 • Start stimulant therapy<br>
-• Example: Methylphenidate<br>
+• Preferred: Methylphenidate<br>
+• Routine monitoring
+</p>
 </div>
 
-<div style='flex:1; background-color:#fff3cd; padding:15px; border-radius:10px;'>
-<b style='color:#856404;'>MODERATE RISK</b><br>
+<div style='flex:1; background:linear-gradient(135deg,#fff3cd,#ffeaa7);
+padding:18px; border-radius:12px;'>
+
+<h4 style='color:#856404;'>⚠️ MODERATE RISK</h4>
+<p style='color:#856404;'>
 • Cautious stimulant use<br>
-• Consider non-stimulant<br>
-• Monitor closely<br>
+• Consider non-stimulants<br>
+• Close monitoring
+</p>
 </div>
 
-<div style='flex:1; background-color:#f8d7da; padding:15px; border-radius:10px;'>
-<b style='color:#721c24;'>HIGH RISK</b><br>
+<div style='flex:1; background:linear-gradient(135deg,#f8d7da,#f5b7b1);
+padding:18px; border-radius:12px;'>
+
+<h4 style='color:#721c24;'>🚨 HIGH RISK</h4>
+<p style='color:#721c24;'>
 • Avoid stimulants<br>
 • Prefer non-stimulants<br>
-• Psychiatric supervision required<br>
+• Psychiatric supervision
+</p>
 </div>
 
 </div>
 """, unsafe_allow_html=True)
 
+# ---------------- CLINICAL INTERPRETATION ----------------
+st.markdown("---")
+
 st.markdown("""
-**Step 1: Initial Therapy**
-- Low Risk → Stimulant (Methylphenidate)  
-- Moderate Risk → Cautious stimulant / Non-stimulant  
-- High Risk → Prefer Non-stimulant  
+<div style='background-color:#e3f2fd; padding:15px; border-radius:12px;'>
 
-**Step 2: Reassessment**
-- Evaluate clinical response  
-- Adjust dose or switch drug class  
+<h4 style='color:#1f4e79;'>🧠 Clinical Interpretation</h4>
+""", unsafe_allow_html=True)
 
-**Step 3: Complex Cases**
-- Specialist referral  
-- Combination therapy under supervision  
-""")
+if mood:
+    st.write("• Mood instability may affect stimulant tolerability.")
+if suicidal:
+    st.write("• Suicidal ideation requires careful monitoring.")
+if hallucination:
+    st.write("• Psychotic symptoms may worsen with stimulants.")
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------- SUMMARY ----------------
 st.markdown("---")
-st.subheader("Patient Summary")
+
+st.markdown("""
+<div style='background-color:#ede7f6; padding:15px; border-radius:12px;'>
+
+<h4 style='color:#4b2c5e;'>📄 Patient Summary</h4>
+""", unsafe_allow_html=True)
 
 st.write(f"Risk Level: {risk}")
 st.write(f"Score: {score}")
@@ -194,14 +228,15 @@ elif risk == "MODERATE":
 else:
     st.write("Recommendation: Standard stimulant therapy")
 
+st.markdown("</div>", unsafe_allow_html=True)
+
 # ---------------- RESEARCH TEAM ----------------
 st.markdown("---")
-st.markdown("### 👨‍🔬 Research Team")
 
 st.markdown("""
 <div class='footer-box'>
 
-<b>Research Team Name:</b> PhD  <br>
+<b>Research Team Name:</b> Samson K. Wilson <br>
 <b>Research Student:</b> Samson K. Wilson <br>
 <b>Clinical Expert (Psychiatrist):</b> Dr. Srinivas Singisetti <br>
 <b>Research Supervisor:</b> Dr. Amit Kundu
@@ -211,4 +246,4 @@ st.markdown("""
 
 # ---------------- DISCLAIMER ----------------
 st.markdown("---")
-st.warning("This is an exploratory decision-support tool and does NOT replace clinical judgment or diagnosis.")
+st.warning("This tool is exploratory and does NOT replace clinical judgment.")
