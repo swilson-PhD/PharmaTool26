@@ -15,12 +15,21 @@ st.markdown("""
     background-color: white;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
 }
+.footer-box {
+    background-color: #eef3f8;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
 h1 {
     text-align: center;
     color: #1f4e79;
 }
 </style>
 """, unsafe_allow_html=True)
+
+# ---------------- LOGO ----------------
+st.image("logo.png", use_container_width=True)
 
 # ---------------- TITLE ----------------
 st.title("ADHD Pharmacotherapy Decision-Support Tool")
@@ -74,8 +83,6 @@ with col2:
     st.subheader("Risk Assessment")
 
     st.metric("Score", score)
-
-    # Risk meter
     st.progress(score / 7)
 
     st.markdown(f"<h3 style='color:{color};'>Risk Level: {risk}</h3>", unsafe_allow_html=True)
@@ -149,6 +156,21 @@ elif risk == "MODERATE":
     st.write("Recommendation: Individualized treatment approach")
 else:
     st.write("Recommendation: Standard stimulant therapy")
+
+# ---------------- RESEARCH TEAM ----------------
+st.markdown("---")
+st.markdown("### 👨‍🔬 Research Team")
+
+st.markdown("""
+<div class='footer-box'>
+
+<b>Research Team Name:</b> Samson K. Wilson <br>
+<b>Research Student:</b> Samson K. Wilson <br>
+<b>Clinical Expert (Psychiatrist):</b> Dr. Srinivas Singisetti <br>
+<b>Research Supervisor:</b> Dr. Amit Kundu
+
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------- DISCLAIMER ----------------
 st.markdown("---")
