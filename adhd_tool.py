@@ -236,7 +236,7 @@ st.markdown("---")
 st.markdown("""
 <div class='footer-box'>
 
-<b>Research Team Name:</b> Samson K. Wilson <br>
+<b>Research Team Name:</b> PhD <br>
 <b>Research Student:</b> Samson K. Wilson <br>
 <b>Clinical Expert (Psychiatrist):</b> Dr. Srinivas Singisetti <br>
 <b>Research Supervisor:</b> Dr. Amit Kundu
